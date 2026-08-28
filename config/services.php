@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Third Party Services
@@ -36,11 +35,13 @@ return [
     ],
     'fonnte' => [
         'token' => env('FONNTE_TOKEN'),
-        'url'   => env('FONNTE_URL', 'https://api.fonnte.com/send'),
+        'url' => env('FONNTE_URL', 'https://api.fonnte.com/send'),
     ],
 
     'admin' => [
         'whatsapp' => env('ADMIN_WHATSAPP_NUMBER'),
     ],
-
+    'kjri' => [
+        'whatsapp' => env('KJRI_WHATSAPP_NUMBER', '966505966623'),
+    ],
 ];

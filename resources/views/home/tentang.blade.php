@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('title', 'Tentang Program — Layanan Jamaah Haji & Umroh')
-@section('description', 'Mengenal lebih dekat tujuan dan cara kerja layanan informasi dan pengaduan bagi jamaah haji dan umroh.')
+@section('description', 'Mengenal lebih dekat tujuan dan cara kerja layanan informasi dan pengaduan bagi jamaah haji dan
+    umroh.')
 
 @section('content')
 
@@ -29,8 +30,10 @@
                     </div>
                 </div>
                 <div class="col-lg-6 order-1 order-lg-2">
-                    <div class="about-hero-visual">
-                        <i class="bi bi-shield-check"></i>
+                    <div class="hero-image-frame">
+                        <div class="hero-image-wrapper">
+                            <img src="{{ asset('img/logo/hero-section.jpeg') }}" alt="Jamaah Haji dan Umroh">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -42,10 +45,7 @@
         <div class="container">
             <div class="row align-items-center g-5">
                 <div class="col-lg-6">
-                    <x-section-heading
-                        eyebrow="Latar Belakang"
-                        title="Kenapa Layanan Ini Dibuat?"
-                    />
+                    <x-section-heading eyebrow="Latar Belakang" title="Kenapa Layanan Ini Dibuat?" />
                     <p class="text-muted-custom fs-5" style="line-height: 1.8;">
                         Website ini dibuat sebagai sarana informasi dan pengaduan bagi
                         jamaah haji dan umroh yang mengalami kendala selama perjalanan.
@@ -80,7 +80,8 @@
     </section>
 
     {{-- ============ TUJUAN PROGRAM ============ --}}
-    <section class="section section-sm" style="background-color: var(--color-surface); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+    <section class="section section-sm"
+        style="background-color: var(--color-surface); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
         <div class="container">
             <x-section-heading align="center" eyebrow="Fokus Kami" title="Tujuan Program" />
             <div class="row g-4">
