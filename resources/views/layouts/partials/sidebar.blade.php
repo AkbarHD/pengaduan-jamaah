@@ -45,12 +45,21 @@
                 </a>
             </li>
             <li class="side-nav-item">
-    <a href="{{ route('admin.pengaduan.index') }}"
-       class="side-nav-link {{ request()->routeIs('admin.pengaduan.*') ? 'active' : '' }}">
-        <span class="menu-icon"><i class="ti ti-message-report"></i></span>
-        <span class="menu-text">Pengaduan</span>
-    </a>
-</li>
+                <a href="{{ route('admin.pengaduan.index') }}"
+                    class="side-nav-link {{ request()->routeIs('admin.pengaduan.*') ? 'active' : '' }}">
+                    <span class="menu-icon"><i class="ti ti-message-report"></i></span>
+                    <span class="menu-text">Pengaduan</span>
+                </a>
+            </li>
+
+            <li class="side-nav-item">
+                <a href="{{ route('admin.berita.index') }}"
+                    class="side-nav-link {{ request()->routeIs('admin.berita.*') ? 'active' : '' }}">
+                    <span class="menu-icon"><i class="ti ti-news"></i></span>
+                    <span class="menu-text">Berita</span>
+                </a>
+            </li>
+
         </ul>
     </div>
 </div>

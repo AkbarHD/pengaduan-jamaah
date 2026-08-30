@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Artikel;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\Berita;
 
 class HomeController extends Controller
 {
@@ -87,5 +88,39 @@ class HomeController extends Controller
     public function cekStatus()
     {
         return view('status.index');
+    }
+
+    public function berita(Request $request)
+    {
+        $search = $request->query('search');
+
+        $beritas = Berita::published()
+            ->when($search, function ($q) use ($search) {
+                $q->where(function ($qq) use ($search) {
+                    $qq
+                        ->where('judul', 'like', "%{$search}%")
+                        ->orWhere('deskripsi', 'like', "%{$search}%");
+                });
+            })
+            ->latest()
+            ->paginate(6)
+            ->withQueryString();
+
+        return view('berita.index', compact('beritas', 'search'));
+    }
+
+    public function beritaDetail(string $slug)
+    {
+        $berita = Berita::published()
+            ->where('slug', $slug)
+            ->firstOrFail();
+
+        $beritaTerkait = Berita::published()
+            ->where('id', '!=', $berita->id)
+            ->latest()
+            ->take(3)
+            ->get();
+
+        return view('berita.show', compact('berita', 'beritaTerkait'));
     }
 }

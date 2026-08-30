@@ -86,6 +86,16 @@
                             Lihat Panduan
                         </x-button>
                     </div>
+
+                    <div class="hero-kjri-contact">
+                        <span class="icon-box"><i class="bi bi-telephone-fill"></i></span>
+                        <div>
+                            <span class="label">Kontak Darurat KJRI</span>
+                            <a href="tel:+9665059666623" class="number-link">
+                                <span class="number">+966 50 596 6623</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
 
             </div>

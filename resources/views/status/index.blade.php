@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('title', 'Cek Status Pengaduan — Layanan Jamaah Haji & Umroh')
-@section('description', 'Periksa perkembangan pengaduan yang telah Anda buat dengan memasukkan nomor pengaduan dan nomor
+@section('description',
+    'Periksa perkembangan pengaduan yang telah Anda buat dengan memasukkan nomor pengaduan dan nomor
     WhatsApp.')
 
 @section('content')
@@ -35,5 +36,5 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('js/status.js') }}"></script>
+    <script src="{{ asset('js/status.js?v=' . date('his')) }}"></script>
 @endpush

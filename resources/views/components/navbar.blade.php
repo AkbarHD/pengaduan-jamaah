@@ -18,6 +18,12 @@
                         <a class="nav-link site-nav-link {{ request()->routeIs('home') ? 'active' : '' }}"
                             href="{{ route('home') }}">Beranda</a>
                     </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link site-nav-link {{ request()->routeIs('berita', 'berita.detail') ? 'active' : '' }}"
+                            href="{{ route('berita') }}">Berita</a>
+                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link site-nav-link {{ request()->routeIs('panduan') ? 'active' : '' }}"
                             href="{{ route('panduan') }}">Panduan &amp; Pencegahan</a>
