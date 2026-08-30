@@ -28,7 +28,9 @@ class ArtikelController extends Controller
         $validated = $this->validateData($request);
 
         if ($request->hasFile('thumbnail')) {
-            $validated['thumbnail'] = $this->uploadImage($request->file('thumbnail'));
+            $validated['thumbnail'] = $this->uploadImage(
+                $request->file('thumbnail')
+            );
         }
 
         $validated['created_by'] = Auth::id();
@@ -51,7 +53,9 @@ class ArtikelController extends Controller
 
         if ($request->hasFile('thumbnail')) {
             $this->deleteFile($this->thumbnailDirectory, $artikel->thumbnail);
-            $validated['thumbnail'] = $this->uploadImage($request->file('thumbnail'));
+            $validated['thumbnail'] = $this->uploadImage(
+                $request->file('thumbnail')
+            );
         }
 
         $artikel->update($validated);
@@ -74,7 +78,15 @@ class ArtikelController extends Controller
     public function downloadPdf(Artikel $artikel)
     {
         $pdf = Pdf::loadView('admin.artikel.pdf', compact('artikel'))
-            ->setPaper('a4', 'portrait');
+            ->setPaper('a4', 'portrait')
+            ->setOptions([
+                'isHtml5ParserEnabled' => true,
+                'isRemoteEnabled' => true,
+                'defaultFont' => 'DejaVu Sans',
+                'dpi' => 96,
+                'chroot' => public_path(),
+                'isPhpEnabled' => false,
+            ]);
 
         return $pdf->download($artikel->slug . '.pdf');
     }
@@ -82,13 +94,18 @@ class ArtikelController extends Controller
     private function validateData(Request $request): array
     {
         return $request->validate([
-            'kategori'   => ['required', 'in:panduan,pencegahan'],
-            'judul'      => ['required', 'string', 'max:255'],
-            'deskripsi'  => ['required', 'string', 'max:500'],
-            'konten'     => ['required', 'string'],
-            'thumbnail'  => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'kategori' => ['required', 'in:panduan,pencegahan'],
+            'judul' => ['required', 'string', 'max:255'],
+            'deskripsi' => ['required', 'string', 'max:500'],
+            'konten' => ['required', 'string'],
+            'thumbnail' => [
+                'nullable',
+                'image',
+                'mimes:jpg,jpeg,png,webp',
+                'max:2048',
+            ],
             'waktu_baca' => ['nullable', 'string', 'max:50'],
-            'status'     => ['required', 'in:draft,published'],
+            'status' => ['required', 'in:draft,published'],
         ]);
     }
 
@@ -96,11 +113,12 @@ class ArtikelController extends Controller
     {
         $directory = public_path($this->thumbnailDirectory);
 
-        if (! file_exists($directory)) {
+        if (!file_exists($directory)) {
             mkdir($directory, 0755, true);
         }
 
-        $filename = uniqid('thumb_') . '.' . $file->getClientOriginalExtension();
+        $filename =
+            uniqid('thumb_') . '.' . $file->getClientOriginalExtension();
         $file->move($directory, $filename);
 
         return $filename;
@@ -108,7 +126,7 @@ class ArtikelController extends Controller
 
     private function deleteFile(string $directory, ?string $filename): void
     {
-        if (! $filename) {
+        if (!$filename) {
             return;
         }
 

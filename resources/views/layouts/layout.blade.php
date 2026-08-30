@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     @include('layouts.partials.css')
     @stack('styles')
 </head>
+
 <body>
     <div class="wrapper">
         @include('layouts.partials.sidebar')
@@ -16,4 +18,5 @@
     @include('layouts.partials.js')
     @stack('scripts')
 </body>
+
 </html>

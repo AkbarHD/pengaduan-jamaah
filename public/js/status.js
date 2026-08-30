@@ -50,14 +50,20 @@ document.addEventListener('DOMContentLoaded', function () {
         formCard.classList.add('d-none');
         emptyResultWrapper.classList.add('d-none');
         resultWrapper.classList.remove('d-none');
-        resultWrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        resultWrapper.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
     }
 
     function showEmptyState() {
         formCard.classList.add('d-none');
         resultWrapper.classList.add('d-none');
         emptyResultWrapper.classList.remove('d-none');
-        emptyResultWrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        emptyResultWrapper.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
     }
 
     function resetForm() {
@@ -65,7 +71,10 @@ document.addEventListener('DOMContentLoaded', function () {
         resultWrapper.classList.add('d-none');
         emptyResultWrapper.classList.add('d-none');
         form.reset();
-        formCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        formCard.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
     }
 
     form.addEventListener('submit', function (e) {
@@ -84,20 +93,30 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
+        const submitBtn = document.getElementById('btnCekStatus');
+        const originalHtml = submitBtn.innerHTML;
+
+        submitBtn.disabled = true;
+        submitBtn.classList.add('is-loading');
+        submitBtn.innerHTML = `
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        Memeriksa Status...
+    `;
+
         const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
         fetch('/cek-status/check', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': csrfToken,
-                'Accept': 'application/json',
-            },
-            body: JSON.stringify({
-                nomor_pengaduan: nomorPengaduan,
-                whatsapp: whatsapp,
-            }),
-        })
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken,
+                    'Accept': 'application/json',
+                },
+                body: JSON.stringify({
+                    nomor_pengaduan: nomorPengaduan,
+                    whatsapp: whatsapp,
+                }),
+            })
             .then((res) => res.json())
             .then((res) => {
                 if (res.found) {
@@ -113,6 +132,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     text: 'Tidak dapat memeriksa status saat ini. Silakan coba lagi.',
                     confirmButtonColor: '#2563EB',
                 });
+            })
+            .finally(() => {
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('is-loading');
+                submitBtn.innerHTML = originalHtml;
             });
     });
 

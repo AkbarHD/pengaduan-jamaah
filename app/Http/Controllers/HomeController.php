@@ -7,9 +7,12 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 class HomeController extends Controller
 {
-   public function index()
+    public function index()
     {
-        $artikelTerbaru = Artikel::published()->latest()->take(3)->get();
+        $artikelTerbaru = Artikel::published()
+            ->latest()
+            ->take(3)
+            ->get();
 
         return view('home.index', compact('artikelTerbaru'));
     }
@@ -27,14 +30,15 @@ class HomeController extends Controller
     public function panduan(Request $request)
     {
         $kategori = $request->query('kategori');
-        $search   = $request->query('search');
+        $search = $request->query('search');
 
         $artikels = Artikel::published()
-            ->when($kategori, fn ($q) => $q->kategori($kategori))
+            ->when($kategori, fn($q) => $q->kategori($kategori))
             ->when($search, function ($q) use ($search) {
                 $q->where(function ($qq) use ($search) {
-                    $qq->where('judul', 'like', "%{$search}%")
-                       ->orWhere('deskripsi', 'like', "%{$search}%");
+                    $qq
+                        ->where('judul', 'like', "%{$search}%")
+                        ->orWhere('deskripsi', 'like', "%{$search}%");
                 });
             })
             ->latest()
@@ -46,7 +50,9 @@ class HomeController extends Controller
 
     public function panduanDetail(string $slug)
     {
-        $artikel = Artikel::published()->where('slug', $slug)->firstOrFail();
+        $artikel = Artikel::published()
+            ->where('slug', $slug)
+            ->firstOrFail();
 
         $artikelTerkait = Artikel::published()
             ->where('kategori', $artikel->kategori)
@@ -60,9 +66,20 @@ class HomeController extends Controller
 
     public function panduanDownload(string $slug)
     {
-        $artikel = Artikel::published()->where('slug', $slug)->firstOrFail();
+        $artikel = Artikel::published()
+            ->where('slug', $slug)
+            ->firstOrFail();
 
-        $pdf = Pdf::loadView('admin.artikel.pdf', compact('artikel'))->setPaper('a4', 'portrait');
+        $pdf = Pdf::loadView('admin.artikel.pdf', compact('artikel'))
+            ->setPaper('a4', 'portrait')
+            ->setOptions([
+                'isHtml5ParserEnabled' => true,
+                'isRemoteEnabled' => true,
+                'defaultFont' => 'DejaVu Sans',
+                'dpi' => 96,
+                'chroot' => public_path(),
+                'isPhpEnabled' => false,
+            ]);
 
         return $pdf->download($artikel->slug . '.pdf');
     }

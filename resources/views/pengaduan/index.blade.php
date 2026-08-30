@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('title', 'Buat Pengaduan — Layanan Jamaah Haji & Umroh')
-@section('description', 'Sampaikan kendala yang Anda alami selama perjalanan haji atau umroh agar kami dapat memberikan
+@section('description',
+    'Sampaikan kendala yang Anda alami selama perjalanan haji atau umroh agar kami dapat memberikan
     arahan yang sesuai.')
 
 @section('content')

@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('title', 'Cek Status Pengaduan — Layanan Jamaah Haji & Umroh')
-@section('description', 'Periksa perkembangan pengaduan yang telah Anda buat dengan memasukkan nomor pengaduan dan nomor WhatsApp.')
+@section('description', 'Periksa perkembangan pengaduan yang telah Anda buat dengan memasukkan nomor pengaduan dan nomor
+    WhatsApp.')
 
 @section('content')
 
