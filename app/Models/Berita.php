@@ -11,14 +11,8 @@ class Berita extends Model
     use HasFactory;
 
     protected $fillable = [
-        'judul',
-        'slug',
-        'deskripsi',
-        'konten',
-        'thumbnail',
-        'status',
-        'created_by',
-    ];
+    'judul', 'slug', 'deskripsi', 'konten', 'penulis', 'thumbnail', 'status', 'created_by',
+];
 
     protected static function booted(): void
     {

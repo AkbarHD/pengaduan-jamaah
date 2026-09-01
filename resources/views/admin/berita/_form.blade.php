@@ -6,8 +6,8 @@
                 <div class="mb-3">
                     <label class="form-label">Judul Berita <span class="text-danger">*</span></label>
                     <input type="text" name="judul" class="form-control @error('judul') is-invalid @enderror"
-                           placeholder="Contoh: Update Terbaru Layanan Jamaah"
-                           value="{{ old('judul', $berita->judul ?? '') }}" required>
+                        placeholder="Contoh: Update Terbaru Layanan Jamaah"
+                        value="{{ old('judul', $berita->judul ?? '') }}" required>
                     @error('judul')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -15,10 +15,8 @@
 
                 <div class="mb-3">
                     <label class="form-label">Deskripsi Singkat <span class="text-danger">*</span></label>
-                    <textarea name="deskripsi" class="form-control @error('deskripsi') is-invalid @enderror"
-                              rows="2" maxlength="500"
-                              placeholder="Ringkasan 1-2 kalimat, tampil di kartu berita"
-                              required>{{ old('deskripsi', $berita->deskripsi ?? '') }}</textarea>
+                    <textarea name="deskripsi" class="form-control @error('deskripsi') is-invalid @enderror" rows="2" maxlength="500"
+                        placeholder="Ringkasan 1-2 kalimat, tampil di kartu berita" required>{{ old('deskripsi', $berita->deskripsi ?? '') }}</textarea>
                     @error('deskripsi')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -48,12 +46,25 @@
                 <div class="mb-3">
                     <label class="form-label">Status <span class="text-danger">*</span></label>
                     <select name="status" class="form-select @error('status') is-invalid @enderror" required>
-                        <option value="draft" {{ old('status', $berita->status ?? 'draft') === 'draft' ? 'selected' : '' }}>Draft</option>
-                        <option value="published" {{ old('status', $berita->status ?? '') === 'published' ? 'selected' : '' }}>Published</option>
+                        <option value="draft"
+                            {{ old('status', $berita->status ?? 'draft') === 'draft' ? 'selected' : '' }}>Draft</option>
+                        <option value="published"
+                            {{ old('status', $berita->status ?? '') === 'published' ? 'selected' : '' }}>Published
+                        </option>
                     </select>
                     @error('status')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Penulis</label>
+                    <input type="text" name="penulis" class="form-control @error('penulis') is-invalid @enderror"
+                        placeholder="Contoh: Tim KKN UIN Bandung" value="{{ old('penulis', $berita->penulis ?? '') }}">
+                    @error('penulis')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                    <small class="text-muted">Nama yang tampil sebagai penulis berita.</small>
                 </div>
 
                 <div class="mb-3">
@@ -63,13 +74,13 @@
                         @if ($berita->thumbnail)
                             <div class="mb-2">
                                 <img src="{{ asset('uploads/berita-thumbnail/' . $berita->thumbnail) }}"
-                                     alt="Thumbnail saat ini"
-                                     class="img-fluid rounded border" style="max-height: 140px;">
+                                    alt="Thumbnail saat ini" class="img-fluid rounded border" style="max-height: 140px;">
                             </div>
                         @endif
                     @endisset
 
-                    <input type="file" name="thumbnail" class="form-control @error('thumbnail') is-invalid @enderror" accept=".jpg,.jpeg,.png,.webp">
+                    <input type="file" name="thumbnail" class="form-control @error('thumbnail') is-invalid @enderror"
+                        accept=".jpg,.jpeg,.png,.webp">
                     @error('thumbnail')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -97,24 +108,50 @@
     <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/quill-table-better@1.1.6/dist/quill-table-better.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            Quill.register({ 'modules/table-better': QuillTableBetter }, true);
+        document.addEventListener('DOMContentLoaded', function() {
+            Quill.register({
+                'modules/table-better': QuillTableBetter
+            }, true);
 
             const quill = new Quill('#editorKonten', {
                 theme: 'snow',
                 placeholder: 'Tulis isi lengkap berita di sini...',
                 modules: {
                     toolbar: [
-                        [{ header: [1, 2, 3, 4, 5, 6, false] }],
-                        [{ font: [] }],
-                        [{ size: ['small', false, 'large', 'huge'] }],
+                        [{
+                            header: [1, 2, 3, 4, 5, 6, false]
+                        }],
+                        [{
+                            font: []
+                        }],
+                        [{
+                            size: ['small', false, 'large', 'huge']
+                        }],
                         ['bold', 'italic', 'underline', 'strike'],
-                        [{ color: [] }, { background: [] }],
-                        [{ script: 'sub' }, { script: 'super' }],
+                        [{
+                            color: []
+                        }, {
+                            background: []
+                        }],
+                        [{
+                            script: 'sub'
+                        }, {
+                            script: 'super'
+                        }],
                         ['blockquote', 'code-block'],
-                        [{ list: 'ordered' }, { list: 'bullet' }],
-                        [{ indent: '-1' }, { indent: '+1' }],
-                        [{ align: [] }],
+                        [{
+                            list: 'ordered'
+                        }, {
+                            list: 'bullet'
+                        }],
+                        [{
+                            indent: '-1'
+                        }, {
+                            indent: '+1'
+                        }],
+                        [{
+                            align: []
+                        }],
                         ['link', 'image', 'video'],
                         ['table-better'],
                         ['clean'],
@@ -134,7 +171,7 @@
             const kontenInput = document.getElementById('kontenInput');
             const form = kontenInput.closest('form');
 
-            form.addEventListener('submit', function (e) {
+            form.addEventListener('submit', function(e) {
                 kontenInput.value = quill.root.innerHTML;
 
                 const isEmpty = quill.getText().trim().length === 0;

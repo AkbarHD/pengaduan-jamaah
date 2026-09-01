@@ -19,6 +19,9 @@
 
                 <div class="d-flex align-items-center gap-3 text-muted-custom fs-sm mb-4">
                     <span><i class="bi bi-calendar3 me-1"></i>{{ $berita->created_at->translatedFormat('d F Y') }}</span>
+                    @if ($berita->penulis)
+                        <span><i class="bi bi-person me-1"></i>{{ $berita->penulis }}</span>
+                    @endif
                 </div>
             </div>
         </div>

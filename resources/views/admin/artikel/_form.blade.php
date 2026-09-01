@@ -97,6 +97,17 @@
                 </div>
 
                 <div class="mb-3">
+    <label class="form-label">Penulis</label>
+    <input type="text" name="penulis" class="form-control @error('penulis') is-invalid @enderror"
+           placeholder="Contoh: Tim KKN UIN Bandung"
+           value="{{ old('penulis', $artikel->penulis ?? '') }}">
+    @error('penulis')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+    <small class="text-muted">Nama yang tampil sebagai penulis artikel.</small>
+</div>
+
+                <div class="mb-3">
                     <label class="form-label">Estimasi Waktu Baca</label>
                     <input type="text" name="waktu_baca"
                         class="form-control @error('waktu_baca') is-invalid @enderror"

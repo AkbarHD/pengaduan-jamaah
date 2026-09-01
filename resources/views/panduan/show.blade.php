@@ -21,6 +21,9 @@
                 <div class="d-flex align-items-center gap-3 text-muted-custom fs-sm mb-4">
                     <span><i class="bi bi-clock me-1"></i>{{ $artikel->waktu_baca ?? '5 menit baca' }}</span>
                     <span><i class="bi bi-calendar3 me-1"></i>{{ $artikel->updated_at->translatedFormat('d F Y') }}</span>
+                    @if ($artikel->penulis)
+                        <span><i class="bi bi-person me-1"></i>{{ $artikel->penulis }}</span>
+                    @endif
                 </div>
             </div>
         </div>
@@ -49,8 +52,8 @@
                         target="_blank" rel="noopener" class="share-btn" aria-label="Bagikan ke WhatsApp">
                         <i class="bi bi-whatsapp"></i>
                     </a>
-                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" target="_blank"
-                        rel="noopener" class="share-btn" aria-label="Bagikan ke Facebook">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}"
+                        target="_blank" rel="noopener" class="share-btn" aria-label="Bagikan ke Facebook">
                         <i class="bi bi-facebook"></i>
                     </a>
                     <a href="https://twitter.com/intent/tweet?url={{ urlencode(url()->current()) }}&text={{ urlencode($artikel->judul) }}"

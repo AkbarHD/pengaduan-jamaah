@@ -92,22 +92,18 @@ class ArtikelController extends Controller
     }
 
     private function validateData(Request $request): array
-    {
-        return $request->validate([
-            'kategori' => ['required', 'in:panduan,pencegahan'],
-            'judul' => ['required', 'string', 'max:255'],
-            'deskripsi' => ['required', 'string', 'max:500'],
-            'konten' => ['required', 'string'],
-            'thumbnail' => [
-                'nullable',
-                'image',
-                'mimes:jpg,jpeg,png,webp',
-                'max:2048',
-            ],
-            'waktu_baca' => ['nullable', 'string', 'max:50'],
-            'status' => ['required', 'in:draft,published'],
-        ]);
-    }
+{
+    return $request->validate([
+        'kategori'   => ['required', 'in:panduan,pencegahan'],
+        'judul'      => ['required', 'string', 'max:255'],
+        'deskripsi'  => ['required', 'string', 'max:500'],
+        'konten'     => ['required', 'string'],
+        'penulis'    => ['nullable', 'string', 'max:150'],
+        'thumbnail'  => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+        'waktu_baca' => ['nullable', 'string', 'max:50'],
+        'status'     => ['required', 'in:draft,published'],
+    ]);
+}
 
     private function uploadImage($file): string
     {
