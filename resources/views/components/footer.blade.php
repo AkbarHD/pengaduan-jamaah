@@ -31,8 +31,9 @@
                 <div class="footer-heading">Navigasi</div>
                 <ul class="footer-link-list">
                     <li><a href="{{ route('home') }}">Beranda</a></li>
-                    <li><a href="{{ route('panduan') }}">Panduan &amp; Pencegahan</a></li>
-                    <li><a href="{{ route('faq') }}">FAQ</a></li>
+                    <li><a href="{{ route('berita') }}">Berita</a></li>
+                    <li><a href="{{ route('panduan') }}">Panduan &amp; Manasik</a></li>
+                    {{-- <li><a href="{{ route('faq') }}">FAQ</a></li> --}}
                     <li><a href="{{ route('tentang') }}">Tentang</a></li>
                 </ul>
             </div>

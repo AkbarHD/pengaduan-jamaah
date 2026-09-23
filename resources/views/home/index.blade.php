@@ -34,7 +34,7 @@
                     </div>
                 </div>
 
-                {{-- <div class="col-lg-5">
+                <div class="col-lg-5">
                     <div class="hero-popular-panel">
                         <div class="hero-popular-header">
                             <h3><i class="bi bi-fire text-danger me-1"></i> Artikel Terbaru</h3>
@@ -70,7 +70,7 @@
                             @endforelse
                         </div>
                     </div>
-                </div> --}}
+                </div>
 
             </div>
         </div>

@@ -38,7 +38,7 @@
                             Nama Anda <span class="form-label-optional">(opsional, boleh nama panggilan)</span>
                         </label>
                         <input type="text" id="penulis" name="penulis" class="form-control-custom"
-                               placeholder="Contoh: Siti dari Bandung">
+                            placeholder="Contoh: Siti dari Bandung">
                     </div>
 
                     <div class="form-card">
@@ -51,20 +51,22 @@
                         <div class="mb-3">
                             <label class="form-label-custom" for="judul">Judul Cerita</label>
                             <input type="text" id="judul" name="judul" class="form-control-custom"
-                                   placeholder="Contoh: Momen Haru Pertama Kali Melihat Ka'bah">
+                                placeholder="Contoh: Momen Haru Pertama Kali Melihat Ka'bah">
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label-custom" for="deskripsi">Ringkasan Singkat</label>
                             <textarea id="deskripsi" name="deskripsi" class="form-control-custom" rows="2" maxlength="500"
-                                      placeholder="1-2 kalimat yang menggambarkan cerita Anda"></textarea>
+                                placeholder="1-2 kalimat yang menggambarkan cerita Anda"></textarea>
                             <p class="form-hint">Akan tampil sebagai cuplikan di halaman Berita.</p>
                         </div>
 
                         <div>
-                            <label class="form-label-custom" for="konten">Ceritakan Pengalaman Anda</label>
-                            <textarea id="konten" name="konten" class="form-control-custom" rows="8"
-                                      placeholder="Tuliskan cerita lengkap Anda di sini. Anda bisa membuat beberapa paragraf dengan menekan Enter dua kali."></textarea>
+                            <label class="form-label-custom" for="editorKonten">Ceritakan Pengalaman Anda</label>
+                            <div id="editorKonten" style="min-height: 220px; background: #fff;"></div>
+                            <textarea name="konten" id="kontenInput" class="d-none"></textarea>
+                            <p class="form-hint">Gunakan toolbar untuk mengatur format tulisan, tambah foto, atau tautan.
+                            </p>
                         </div>
                     </div>
 
@@ -79,11 +81,13 @@
                             <div class="upload-icon"><i class="bi bi-cloud-arrow-up"></i></div>
                             <p>Klik atau seret foto ke sini untuk mengunggah</p>
                             <span>Format JPG, PNG, WEBP — Maksimal 2 MB</span>
-                            <input type="file" id="thumbnailInput" name="thumbnail" class="d-none" accept=".jpg,.jpeg,.png,.webp">
+                            <input type="file" id="thumbnailInput" name="thumbnail" class="d-none"
+                                accept=".jpg,.jpeg,.png,.webp">
                         </div>
 
                         <div id="thumbnailPreviewWrapper" class="mt-3 d-none">
-                            <img id="thumbnailPreview" src="" alt="Preview foto" class="img-fluid rounded border" style="max-height: 220px;">
+                            <img id="thumbnailPreview" src="" alt="Preview foto" class="img-fluid rounded border"
+                                style="max-height: 220px;">
                         </div>
                     </div>
 
@@ -116,57 +120,118 @@
 
 @endsection
 
+@push('styles')
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
+@endpush
+
 @push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function () {
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
 
-    /* ===== Upload & Preview Foto ===== */
-    const uploadZone = document.getElementById('uploadZone');
-    const thumbnailInput = document.getElementById('thumbnailInput');
-    const thumbnailPreview = document.getElementById('thumbnailPreview');
-    const thumbnailPreviewWrapper = document.getElementById('thumbnailPreviewWrapper');
+            /* ===== Quill Editor — Full Toolbar ===== */
+            const quill = new Quill('#editorKonten', {
+                theme: 'snow',
+                placeholder: 'Tulis cerita Anda di sini...',
+                modules: {
+                    toolbar: [
+                        [{
+                            header: [1, 2, 3, false]
+                        }],
+                        [{
+                            font: []
+                        }],
+                        [{
+                            size: ['small', false, 'large', 'huge']
+                        }],
+                        ['bold', 'italic', 'underline', 'strike'],
+                        [{
+                            color: []
+                        }, {
+                            background: []
+                        }],
+                        [{
+                            script: 'sub'
+                        }, {
+                            script: 'super'
+                        }],
+                        ['blockquote'],
+                        [{
+                            list: 'ordered'
+                        }, {
+                            list: 'bullet'
+                        }],
+                        [{
+                            indent: '-1'
+                        }, {
+                            indent: '+1'
+                        }],
+                        [{
+                            align: []
+                        }],
+                        ['link', 'image'],
+                        ['clean'],
+                    ],
+                },
+            });
 
-    uploadZone.addEventListener('click', () => thumbnailInput.click());
+            const kontenInput = document.getElementById('kontenInput');
+            const form = document.getElementById('formSharing');
 
-    uploadZone.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        uploadZone.classList.add('is-dragover');
-    });
-    uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('is-dragover'));
-    uploadZone.addEventListener('drop', (e) => {
-        e.preventDefault();
-        uploadZone.classList.remove('is-dragover');
-        thumbnailInput.files = e.dataTransfer.files;
-        showPreview();
-    });
+            /* ===== Upload & Preview Foto ===== */
+            const uploadZone = document.getElementById('uploadZone');
+            const thumbnailInput = document.getElementById('thumbnailInput');
+            const thumbnailPreview = document.getElementById('thumbnailPreview');
+            const thumbnailPreviewWrapper = document.getElementById('thumbnailPreviewWrapper');
 
-    thumbnailInput.addEventListener('change', showPreview);
+            uploadZone.addEventListener('click', () => thumbnailInput.click());
+            uploadZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadZone.classList.add('is-dragover');
+            });
+            uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('is-dragover'));
+            uploadZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadZone.classList.remove('is-dragover');
+                thumbnailInput.files = e.dataTransfer.files;
+                showPreview();
+            });
+            thumbnailInput.addEventListener('change', showPreview);
 
-    function showPreview() {
-        const file = thumbnailInput.files[0];
-        if (!file) return;
+            function showPreview() {
+                const file = thumbnailInput.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    thumbnailPreview.src = e.target.result;
+                    thumbnailPreviewWrapper.classList.remove('d-none');
+                };
+                reader.readAsDataURL(file);
+            }
 
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            thumbnailPreview.src = e.target.result;
-            thumbnailPreviewWrapper.classList.remove('d-none');
-        };
-        reader.readAsDataURL(file);
-    }
+            /* ===== Submit: sinkron Quill ke textarea + loading state ===== */
+            form.addEventListener('submit', function(e) {
+                kontenInput.value = quill.root.innerHTML;
 
-    /* ===== Loading saat submit ===== */
-    const form = document.getElementById('formSharing');
-    form.addEventListener('submit', function () {
-        const submitBtn = form.querySelector('button[type="submit"]');
-        if (submitBtn) {
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = `
-                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                Mengirim Cerita...
-            `;
-        }
-    });
+                if (quill.getText().trim().length === 0) {
+                    e.preventDefault();
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Cerita belum diisi',
+                        text: 'Mohon ceritakan pengalaman Anda terlebih dahulu.',
+                        confirmButtonColor: '#2563EB',
+                    });
+                    return;
+                }
 
-});
-</script>
+                const submitBtn = form.querySelector('button[type="submit"]');
+                if (submitBtn) {
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML =
+                        `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Mengirim Cerita...`;
+                }
+            });
+
+        });
+    </script>
 @endpush

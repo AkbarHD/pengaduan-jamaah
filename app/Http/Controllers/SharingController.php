@@ -9,6 +9,8 @@ class SharingController extends Controller
 {
     private string $thumbnailDirectory = 'uploads/berita-thumbnail';
 
+    private string $allowedTags = '<p><br><strong><em><u><s><blockquote><ol><ul><li><a><img><h1><h2><h3><sub><sup><span>';
+
     public function create()
     {
         return view('sharing.index');
@@ -20,7 +22,7 @@ class SharingController extends Controller
             'penulis'    => ['nullable', 'string', 'max:150'],
             'judul'      => ['required', 'string', 'max:255'],
             'deskripsi'  => ['required', 'string', 'max:500'],
-            'konten'     => ['required', 'string', 'max:5000'],
+            'konten'     => ['required', 'string', 'max:20000'],
             'thumbnail'  => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'konfirmasi' => ['accepted'],
         ], [
@@ -30,18 +32,10 @@ class SharingController extends Controller
             'konfirmasi.accepted' => 'Mohon konfirmasi bahwa cerita ini benar pengalaman Anda.',
         ]);
 
-        // Ubah textarea polos jadi paragraf HTML yang aman (escape dulu, baru nl2br),
-        // supaya tampil rapi di halaman detail tanpa risiko XSS.
-        $paragraphs = preg_split('/\n\s*\n/', trim($validated['konten']));
-        $konten = collect($paragraphs)
-            ->filter(fn ($p) => trim($p) !== '')
-            ->map(fn ($p) => '<p>' . nl2br(e(trim($p))) . '</p>')
-            ->implode('');
-
         $berita = new Berita([
             'judul'     => $validated['judul'],
             'deskripsi' => $validated['deskripsi'],
-            'konten'    => $konten,
+            'konten'    => $this->sanitizeHtml($validated['konten']),
             'penulis'   => $validated['penulis'] ?: 'Jamaah',
             'status'    => 'draft',
         ]);
@@ -62,6 +56,19 @@ class SharingController extends Controller
         $berita = Berita::where('slug', $slug)->firstOrFail();
 
         return view('sharing.sukses', compact('berita'));
+    }
+
+    /**
+     * Bersihkan HTML dari input publik: batasi tag yang diizinkan,
+     * hapus atribut event handler (onclick dll) dan javascript: link.
+     */
+    private function sanitizeHtml(string $html): string
+    {
+        $clean = strip_tags($html, $this->allowedTags);
+        $clean = preg_replace('/\s*on\w+\s*=\s*("[^"]*"|\'[^\']*\'|[^\s>]+)/i', '', $clean);
+        $clean = preg_replace('/(href|src)\s*=\s*["\']javascript:[^"\']*["\']/i', '$1="#"', $clean);
+
+        return $clean;
     }
 
     private function uploadImage($file): string
