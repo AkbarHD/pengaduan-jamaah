@@ -10,7 +10,7 @@ class HomeController extends Controller
 {
     public function index()
 {
-    $artikelTerbaru = Artikel::published()->latest()->take(4)->get();
+    $artikelTerbaru = Artikel::published()->latest()->take(9)->get();
 
     return view('home.index', compact('artikelTerbaru'));
 }

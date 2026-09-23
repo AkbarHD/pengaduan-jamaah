@@ -7,67 +7,77 @@
     {{-- ============ HERO ============ --}}
     <section class="site-hero">
         <div class="container">
-            <div class="row align-items-center g-5">
+            <div class="row align-items-stretch g-4 g-lg-0">
 
-                <div class="col-lg-7">
-                    <span class="hero-badge">
-                        <i class="bi bi-book-half"></i>
-                        Cerita dari Tanah Suci
-                    </span>
-                    <h1 class="hero-title">
-                        Berbagi Kisah dan Pengalaman Selama di Tanah Suci
-                    </h1>
-                    <p class="hero-description">
-                        Ceritakan pengalaman ibadah haji dan umroh Anda, atau baca
-                        kisah nyata jamaah lain seputar perjalanan di Mekkah dan
-                        Arab Saudi.
-                    </p>
-                    <div class="d-flex flex-column flex-sm-row gap-3">
-                        <x-button href="{{ route('sharing.create') }}" variant="primary" size="lg"
-                            icon="bi-pencil-square">
-                            Bagikan Pengalaman Anda
-                        </x-button>
-                        <x-button href="{{ route('berita') }}" variant="outline-primary" size="lg"
-                            icon="bi-journal-text">
-                            Baca Kisah Jamaah Lain
-                        </x-button>
+                <div class="col-lg-6">
+                    <div class="pe-lg-7">
+                        <span class="hero-badge">
+                            <i class="bi bi-book-half"></i>
+                            Cerita dari Tanah Suci
+                        </span>
+                        <h1 class="hero-title">
+                            Berbagi Kisah dan Pengalaman Selama di Tanah Suci
+                        </h1>
+                        <p class="hero-description">
+                            Ceritakan pengalaman ibadah haji dan umroh Anda, atau baca
+                            kisah nyata jamaah lain seputar perjalanan di Mekkah dan
+                            Arab Saudi.
+                        </p>
+                        <div class="d-flex flex-column flex-sm-row gap-3">
+                            <x-button href="{{ route('sharing.create') }}" variant="primary" size="lg"
+                                icon="bi-pencil-square">
+                                Bagikan Pengalaman Anda
+                            </x-button>
+                            <x-button href="{{ route('berita') }}" variant="outline-primary" size="lg"
+                                icon="bi-journal-text">
+                                Baca Kisah Jamaah Lain
+                            </x-button>
+                        </div>
                     </div>
                 </div>
 
-                <div class="col-lg-5">
-                    <div class="hero-popular-panel">
-                        <div class="hero-popular-header">
-                            <h3><i class="bi bi-fire text-danger me-1"></i> Artikel Terbaru</h3>
-                            <div class="hero-popular-scroll-btns">
-                                <button type="button" id="btnScrollUp" aria-label="Scroll ke atas">
-                                    <i class="bi bi-chevron-up"></i>
-                                </button>
-                                <button type="button" id="btnScrollDown" aria-label="Scroll ke bawah">
-                                    <i class="bi bi-chevron-down"></i>
-                                </button>
-                            </div>
-                        </div>
+                <div class="col-lg-auto d-none d-lg-flex align-items-stretch">
+                    <div class="hero-divider">
+                        <span class="divider-dot"><i class="bi bi-moon-stars-fill"></i></span>
+                    </div>
+                </div>
 
-                        <div class="hero-popular-list" id="heroPopularList">
-                            @forelse ($artikelTerbaru as $index => $artikel)
-                                <a href="{{ route('panduan.detail', $artikel->slug) }}" class="hero-popular-item">
-                                    <span class="hero-popular-thumb">
-                                        @if ($artikel->thumbnail)
-                                            <img src="{{ asset('uploads/artikel-thumbnail/' . $artikel->thumbnail) }}"
-                                                alt="{{ $artikel->judul }}">
-                                        @else
-                                            <i class="bi bi-file-earmark-text"></i>
-                                        @endif
-                                        <span class="hero-popular-number">{{ $index + 1 }}</span>
-                                    </span>
-                                    <span class="hero-popular-text">
-                                        <h5>{{ $artikel->judul }}</h5>
-                                        <span class="hero-popular-category">{{ ucfirst($artikel->kategori) }}</span>
-                                    </span>
-                                </a>
-                            @empty
-                                <p class="text-muted-custom mb-0 fs-sm">Belum ada artikel yang dipublikasikan.</p>
-                            @endforelse
+                <div class="col-lg">
+                    <div class="ps-lg-4">
+                        <div class="hero-popular-panel">
+                            <div class="hero-popular-header">
+                                <h3><i class="bi bi-fire text-danger me-1"></i> Artikel Terbaru</h3>
+                                <div class="hero-popular-scroll-btns">
+                                    <button type="button" id="btnScrollUp" aria-label="Scroll ke atas">
+                                        <i class="bi bi-chevron-up"></i>
+                                    </button>
+                                    <button type="button" id="btnScrollDown" aria-label="Scroll ke bawah">
+                                        <i class="bi bi-chevron-down"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="hero-popular-list" id="heroPopularList">
+                                @forelse ($artikelTerbaru as $index => $artikel)
+                                    <a href="{{ route('panduan.detail', $artikel->slug) }}" class="hero-popular-item">
+                                        <span class="hero-popular-thumb">
+                                            @if ($artikel->thumbnail)
+                                                <img src="{{ asset('uploads/artikel-thumbnail/' . $artikel->thumbnail) }}"
+                                                    alt="{{ $artikel->judul }}">
+                                            @else
+                                                <i class="bi bi-file-earmark-text"></i>
+                                            @endif
+                                            <span class="hero-popular-number">{{ $index + 1 }}</span>
+                                        </span>
+                                        <span class="hero-popular-text">
+                                            <h5>{{ $artikel->judul }}</h5>
+                                            <span class="hero-popular-category">{{ ucfirst($artikel->kategori) }}</span>
+                                        </span>
+                                    </a>
+                                @empty
+                                    <p class="text-muted-custom mb-0 fs-sm">Belum ada artikel yang dipublikasikan.</p>
+                                @endforelse
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -199,141 +209,181 @@
 @push('styles')
     <style>
         .hero-popular-panel {
-  background-color: #F1F5F9;
-  border-radius: var(--radius-lg);
-  padding: 1.25rem;
-}
+            background-color: #F1F5F9;
+            border-radius: var(--radius-lg);
+            padding: 1.25rem;
+        }
 
-.hero-popular-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-}
+        .hero-popular-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
 
-.hero-popular-header h3 {
-  font-size: 1.05rem;
-  margin-bottom: 0;
-}
+        .hero-popular-header h3 {
+            font-size: 1.05rem;
+            margin-bottom: 0;
+        }
 
-.hero-popular-scroll-btns {
-  display: flex;
-  gap: 0.4rem;
-}
+        .hero-popular-scroll-btns {
+            display: flex;
+            gap: 0.4rem;
+        }
 
-.hero-popular-scroll-btns button {
-  width: 32px;
-  height: 32px;
-  border: 1px solid var(--color-border);
-  background-color: #fff;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-navy);
-  transition: var(--transition-base);
-  cursor: pointer;
-}
+        .hero-popular-scroll-btns button {
+            width: 32px;
+            height: 32px;
+            border: 1px solid var(--color-border);
+            background-color: #fff;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-navy);
+            transition: var(--transition-base);
+            cursor: pointer;
+        }
 
-.hero-popular-scroll-btns button:hover {
-  border-color: var(--color-primary);
-  color: var(--color-primary);
-}
+        .hero-popular-scroll-btns button:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+        }
 
-.hero-popular-list {
-  max-height: 480px;
-  overflow-y: auto;
-  scroll-behavior: smooth;
-  padding-right: 0.25rem;
-}
+        .hero-popular-list {
+            max-height: 480px;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+            padding-right: 0.25rem;
+        }
 
-.hero-popular-list::-webkit-scrollbar {
-  width: 5px;
-}
+        .hero-popular-list::-webkit-scrollbar {
+            width: 5px;
+        }
 
-.hero-popular-list::-webkit-scrollbar-thumb {
-  background-color: #CBD5E1;
-  border-radius: 999px;
-}
+        .hero-popular-list::-webkit-scrollbar-thumb {
+            background-color: #CBD5E1;
+            border-radius: 999px;
+        }
 
-.hero-popular-item {
-  display: flex;
-  gap: 0.9rem;
-  background-color: #fff;
-  padding: 0.85rem;
-  border-radius: var(--radius-sm);
-  border-bottom: 3px solid var(--color-primary);
-  margin-bottom: 0.75rem;
-  text-decoration: none;
-  color: inherit;
-  transition: var(--transition-base);
-}
+        .hero-popular-item {
+            display: flex;
+            gap: 0.9rem;
+            background-color: #fff;
+            padding: 0.85rem;
+            border-radius: var(--radius-sm);
+            border-bottom: 3px solid var(--color-primary);
+            margin-bottom: 0.75rem;
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition-base);
+        }
 
-.hero-popular-item:last-child {
-  margin-bottom: 0;
-}
+        .hero-popular-item:last-child {
+            margin-bottom: 0;
+        }
 
-.hero-popular-item:hover {
-  transform: translateX(2px);
-  box-shadow: var(--shadow-sm);
-}
+        .hero-popular-item:hover {
+            transform: translateX(2px);
+            box-shadow: var(--shadow-sm);
+        }
 
-.hero-popular-thumb {
-  position: relative;
-  width: 88px;
-  height: 68px;
-  border-radius: 6px;
-  overflow: hidden;
-  flex-shrink: 0;
-  background-color: var(--color-primary-soft);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+        .hero-popular-thumb {
+            position: relative;
+            width: 88px;
+            height: 68px;
+            border-radius: 6px;
+            overflow: hidden;
+            flex-shrink: 0;
+            background-color: var(--color-primary-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-.hero-popular-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+        .hero-popular-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-.hero-popular-thumb i {
-  color: var(--color-primary);
-  font-size: 1.3rem;
-}
+        .hero-popular-thumb i {
+            color: var(--color-primary);
+            font-size: 1.3rem;
+        }
 
-.hero-popular-number {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  background-color: var(--color-primary);
-  color: #fff;
-  font-weight: 700;
-  font-size: 0.72rem;
-  padding: 0.15rem 0.5rem;
-}
+        .hero-popular-number {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background-color: var(--color-primary);
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.72rem;
+            padding: 0.15rem 0.5rem;
+        }
 
-.hero-popular-text {
-  min-width: 0;
-}
+        .hero-popular-text {
+            min-width: 0;
+        }
 
-.hero-popular-text h5 {
-  font-size: 0.9rem;
-  margin-bottom: 0.35rem;
-  line-height: 1.35;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
+        .hero-popular-text h5 {
+            font-size: 0.9rem;
+            margin-bottom: 0.35rem;
+            line-height: 1.35;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
 
-.hero-popular-category {
-  font-size: 0.7rem;
-  font-weight: 700;
-  color: var(--color-primary);
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-}
+        .hero-popular-category {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .hero-divider {
+            position: relative;
+            width: 1px;
+            align-self: stretch;
+            background: linear-gradient(to bottom,
+                    transparent 0%,
+                    var(--color-border) 15%,
+                    var(--color-primary) 50%,
+                    var(--color-border) 85%,
+                    transparent 100%);
+            opacity: 0.6;
+        }
+
+        .hero-divider .divider-dot {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background-color: #fff;
+            border: 1px solid var(--color-border);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-divider .divider-dot i {
+            color: var(--color-primary);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 991.98px) {
+            .hero-divider {
+                display: none;
+            }
+        }
     </style>
 @endpush
 
