@@ -26,12 +26,12 @@
 
                     <li class="nav-item">
                         <a class="nav-link site-nav-link {{ request()->routeIs('panduan') ? 'active' : '' }}"
-                            href="{{ route('panduan') }}">Panduan &amp; Pencegahan</a>
+                            href="{{ route('panduan') }}">Panduan &amp; Manasik</a>
                     </li>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link site-nav-link {{ request()->routeIs('cek-status') ? 'active' : '' }}"
                             href="{{ route('cek-status') }}">Cek Status Pengaduan</a>
-                    </li>
+                    </li> --}}
                     <li class="nav-item">
                         <a class="nav-link site-nav-link {{ request()->routeIs('faq') ? 'active' : '' }}"
                             href="{{ route('faq') }}">FAQ</a>
@@ -43,8 +43,9 @@
                 </ul>
 
                 <div class="d-grid d-lg-block">
-                    <x-button href="{{ route('pengaduan') }}" variant="primary" size="md" icon="bi-megaphone">
-                        Buat Pengaduan
+                    <x-button href="{{ route('sharing.create') }}" variant="primary" size="md"
+                        icon="bi-pencil-square">
+                        Bagikan Pengalaman
                     </x-button>
                 </div>
             </div>

@@ -13,13 +13,15 @@
                 </p>
                 <div class="d-flex gap-2 mt-3">
                     <a href="https://www.instagram.com/kknarabsaudi.uinbdg?utm_source=ig_web_button_share_sheet&igsi=ZDNlZDc0MzIxNw=="
-                       target="_blank" rel="noopener" class="social-icon" aria-label="Instagram">
+                        target="_blank" rel="noopener" class="social-icon" aria-label="Instagram">
                         <i class="bi bi-instagram"></i>
                     </a>
-                    <a href="https://wa.me/6281356935182" target="_blank" rel="noopener" class="social-icon" aria-label="WhatsApp">
+                    <a href="https://wa.me/6281356935182" target="_blank" rel="noopener" class="social-icon"
+                        aria-label="WhatsApp">
                         <i class="bi bi-whatsapp"></i>
                     </a>
-                    <a href="https://www.tiktok.com/@kknarabsaudiuinbdg" target="_blank" rel="noopener" class="social-icon" aria-label="TikTok">
+                    <a href="https://www.tiktok.com/@kknarabsaudiuinbdg" target="_blank" rel="noopener"
+                        class="social-icon" aria-label="TikTok">
                         <i class="bi bi-tiktok"></i>
                     </a>
                 </div>
@@ -38,8 +40,8 @@
             <div class="col-6 col-lg-3">
                 <div class="footer-heading">Layanan</div>
                 <ul class="footer-link-list">
-                    <li><a href="{{ route('pengaduan') }}">Buat Pengaduan</a></li>
-                    <li><a href="{{ route('cek-status') }}">Cek Status Pengaduan</a></li>
+                    <li><a href="{{ route('sharing.create') }}">Bagikan Pengalaman</a></li>
+                    <li><a href="{{ route('berita') }}">Berita &amp; Cerita Jamaah</a></li>
                 </ul>
             </div>
 
@@ -52,11 +54,13 @@
                     </li>
                     <li>
                         <i class="bi bi-tiktok me-2 text-primary-custom"></i>
-                        <a href="https://www.tiktok.com/@kknarabsaudiuinbdg" target="_blank" rel="noopener">@kknarabsaudiuinbdg</a>
+                        <a href="https://www.tiktok.com/@kknarabsaudiuinbdg" target="_blank"
+                            rel="noopener">@kknarabsaudiuinbdg</a>
                     </li>
                     <li>
                         <i class="bi bi-instagram me-2 text-primary-custom"></i>
-                        <a href="https://www.instagram.com/kknarabsaudi.uinbdg" target="_blank" rel="noopener">@kknarabsaudi.uinbdg</a>
+                        <a href="https://www.instagram.com/kknarabsaudi.uinbdg" target="_blank"
+                            rel="noopener">@kknarabsaudi.uinbdg</a>
                     </li>
                 </ul>
             </div>

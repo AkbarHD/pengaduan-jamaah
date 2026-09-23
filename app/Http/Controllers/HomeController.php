@@ -9,14 +9,11 @@ use App\Models\Berita;
 class HomeController extends Controller
 {
     public function index()
-    {
-        $artikelTerbaru = Artikel::published()
-            ->latest()
-            ->take(3)
-            ->get();
+{
+    $artikelTerbaru = Artikel::published()->latest()->take(4)->get();
 
-        return view('home.index', compact('artikelTerbaru'));
-    }
+    return view('home.index', compact('artikelTerbaru'));
+}
 
     public function faq()
     {
