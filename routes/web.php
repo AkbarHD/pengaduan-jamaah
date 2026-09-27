@@ -89,6 +89,9 @@ Route::middleware('auth')->group(function () {
                 'show',
             ]);
 
+            Route::post('berita/{berita}/reject', [BeritaController::class, 'reject'])->name('berita.reject');
+            Route::post('berita/{berita}/publish', [BeritaController::class, 'publish'])->name('berita.publish');
+
             Route::get('pengaduan', [
                 PengaduanAdminController::class,
                 'index',

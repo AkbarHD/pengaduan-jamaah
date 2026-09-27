@@ -55,6 +55,9 @@
                         <option value="pencegahan"
                             {{ old('kategori', $artikel->kategori ?? '') === 'pencegahan' ? 'selected' : '' }}>
                             Pencegahan</option>
+                        <option value="manasik"
+                            {{ old('kategori', $artikel->kategori ?? '') === 'manasik' ? 'selected' : '' }}>Manasik
+                        </option>
                     </select>
                     @error('kategori')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -97,15 +100,15 @@
                 </div>
 
                 <div class="mb-3">
-    <label class="form-label">Penulis</label>
-    <input type="text" name="penulis" class="form-control @error('penulis') is-invalid @enderror"
-           placeholder="Contoh: Tim KKN UIN Bandung"
-           value="{{ old('penulis', $artikel->penulis ?? '') }}">
-    @error('penulis')
-        <div class="invalid-feedback">{{ $message }}</div>
-    @enderror
-    <small class="text-muted">Nama yang tampil sebagai penulis artikel.</small>
-</div>
+                    <label class="form-label">Penulis</label>
+                    <input type="text" name="penulis" class="form-control @error('penulis') is-invalid @enderror"
+                        placeholder="Contoh: Tim KKN UIN Bandung"
+                        value="{{ old('penulis', $artikel->penulis ?? '') }}">
+                    @error('penulis')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                    <small class="text-muted">Nama yang tampil sebagai penulis artikel.</small>
+                </div>
 
                 <div class="mb-3">
                     <label class="form-label">Estimasi Waktu Baca</label>

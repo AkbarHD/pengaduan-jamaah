@@ -57,6 +57,15 @@
                     @enderror
                 </div>
 
+                @if (isset($berita) && $berita->status === 'rejected' && $berita->alasan_penolakan)
+                    <div class="alert alert-danger fs-sm mb-3">
+                        <strong>Alasan Ditolak:</strong><br>
+                        {{ $berita->alasan_penolakan }}
+                    </div>
+                @endif
+
+
+
                 <div class="mb-3">
                     <label class="form-label">Penulis</label>
                     <input type="text" name="penulis" class="form-control @error('penulis') is-invalid @enderror"

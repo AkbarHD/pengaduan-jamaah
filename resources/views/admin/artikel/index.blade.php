@@ -37,6 +37,7 @@
                                             <option value="">Semua Kategori</option>
                                             <option value="Panduan">Panduan</option>
                                             <option value="Pencegahan">Pencegahan</option>
+                                            <option value="Manasik">Manasik</option>
                                         </select>
                                         <i data-lucide="filter" class="app-search-icon text-muted"></i>
                                     </div>
@@ -89,8 +90,10 @@
                                                     <td>
                                                         @if ($artikel->kategori === 'panduan')
                                                             <span class="badge badge-soft-primary fs-xxs">Panduan</span>
-                                                        @else
+                                                        @elseif ($artikel->kategori === 'pencegahan')
                                                             <span class="badge badge-soft-warning fs-xxs">Pencegahan</span>
+                                                        @else
+                                                            <span class="badge badge-soft-info fs-xxs">Manasik</span>
                                                         @endif
                                                     </td>
                                                     <td>

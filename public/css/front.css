@@ -1920,6 +1920,11 @@ textarea.form-control-custom {
   padding-block: 2.5rem 1.5rem;
 }
 
+.article-badge.badge-manasik {
+  color: #7C3AED;
+  background-color: #F5F3FF;
+}
+
 .article-detail-thumb {
   border-radius: var(--radius-lg);
   overflow: hidden;

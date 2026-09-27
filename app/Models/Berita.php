@@ -11,8 +11,10 @@ class Berita extends Model
     use HasFactory;
 
     protected $fillable = [
-    'judul', 'slug', 'deskripsi', 'konten', 'penulis', 'thumbnail', 'status', 'created_by',
+    'judul', 'slug', 'deskripsi', 'konten', 'penulis', 'thumbnail',
+    'status', 'alasan_penolakan', 'created_by',
 ];
+
 
     protected static function booted(): void
     {
@@ -48,6 +50,17 @@ class Berita extends Model
 
         return $slug;
     }
+
+    public const STATUS_ORDER = [
+    'draft'     => 1,
+    'published' => 2,
+    'rejected'  => 3,
+];
+
+public function scopeOrderByStatusPriority($query)
+{
+    return $query->orderByRaw("FIELD(status, 'draft', 'published', 'rejected')");
+}
 
     public function author()
     {

@@ -94,7 +94,7 @@ class ArtikelController extends Controller
     private function validateData(Request $request): array
 {
     return $request->validate([
-        'kategori'   => ['required', 'in:panduan,pencegahan'],
+        'kategori'   => ['required', 'in:panduan,pencegahan,manasik'],
         'judul'      => ['required', 'string', 'max:255'],
         'deskripsi'  => ['required', 'string', 'max:500'],
         'konten'     => ['required', 'string'],

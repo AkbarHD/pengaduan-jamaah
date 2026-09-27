@@ -47,14 +47,14 @@
                         <div class="hero-popular-panel">
                             <div class="hero-popular-header">
                                 <h3><i class="bi bi-fire text-danger me-1"></i> Artikel Terbaru</h3>
-                                <div class="hero-popular-scroll-btns">
+                                {{-- <div class="hero-popular-scroll-btns">
                                     <button type="button" id="btnScrollUp" aria-label="Scroll ke atas">
                                         <i class="bi bi-chevron-up"></i>
                                     </button>
                                     <button type="button" id="btnScrollDown" aria-label="Scroll ke bawah">
                                         <i class="bi bi-chevron-down"></i>
                                     </button>
-                                </div>
+                                </div> --}}
                             </div>
 
                             <div class="hero-popular-list" id="heroPopularList">

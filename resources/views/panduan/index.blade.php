@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('title', 'Panduan & Pencegahan — Layanan Jamaah Haji & Umroh')
-@section('description', 'Informasi untuk membantu Anda mempersiapkan perjalanan dan menghadapi berbagai kendala selama ibadah haji dan umroh.')
+@section('description', 'Informasi untuk membantu Anda mempersiapkan perjalanan dan menghadapi berbagai kendala selama
+    ibadah haji dan umroh.')
 
 @section('content')
 

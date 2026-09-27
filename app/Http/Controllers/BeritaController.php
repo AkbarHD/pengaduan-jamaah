@@ -10,12 +10,44 @@ class BeritaController extends Controller
 {
     private string $thumbnailDirectory = 'uploads/berita-thumbnail';
 
-    public function index()
-    {
-        $beritas = Berita::latest()->get();
+   public function index()
+{
+    $beritas = Berita::latest()
+        ->orderByStatusPriority()
+        ->get();
 
-        return view('admin.berita.index', compact('beritas'));
-    }
+    return view('admin.berita.index', compact('beritas'));
+}
+
+public function reject(Request $request, Berita $berita)
+{
+    $validated = $request->validate([
+        'alasan_penolakan' => ['required', 'string', 'max:500'],
+    ], [
+        'alasan_penolakan.required' => 'Mohon isi alasan penolakan.',
+    ]);
+
+    $berita->update([
+        'status'           => 'rejected',
+        'alasan_penolakan' => $validated['alasan_penolakan'],
+    ]);
+
+    return redirect()
+        ->route('admin.berita.index')
+        ->with('success', 'Cerita berhasil ditolak.');
+}
+
+public function publish(Berita $berita)
+{
+    $berita->update([
+        'status'           => 'published',
+        'alasan_penolakan' => null,
+    ]);
+
+    return redirect()
+        ->route('admin.berita.index')
+        ->with('success', 'Cerita berhasil dipublikasikan.');
+}
 
     public function create()
     {

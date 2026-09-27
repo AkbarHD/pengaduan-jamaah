@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('artikels', function (Blueprint $table) {
             $table->id();
-            $table->enum('kategori', ['panduan', 'pencegahan']);
+            $table->enum('kategori', ['panduan', 'pencegahan', 'manasik']);
             $table->string('judul');
             $table->string('slug')->unique();
             $table->longText('deskripsi', 500);
