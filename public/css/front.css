@@ -244,46 +244,24 @@ button:focus-visible,
    HERO POPULAR PANEL (scrollable, mirip referensi)
    ========================================================================== */
 
-
 /* ==========================================================================
    HERO IMAGE FRAME
    ========================================================================== */
-.hero-image-frame {
-  position: relative;
-  padding: 16px 16px 16px 0;
+
+.hero-image-wrapper {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-md);
+  aspect-ratio: 4 / 3;
 }
 
-.hero-image-frame::before {
-  content: '';
-  position: absolute;
-  top: 16px;
-  left: 16px;
+.hero-image-wrapper img {
   width: 100%;
   height: 100%;
-  border: 2px solid var(--color-primary);
-  border-radius: var(--radius-lg);
-  z-index: 0;
-}
-
-.hero-image-frame .hero-image-wrapper {
-  position: relative;
-  z-index: 1;
-}
-
-.hero-image-frame::after {
-  content: '';
-  position: absolute;
-  bottom: -14px;
-  right: -14px;
-  width: 90px;
-  height: 90px;
-  background-image: radial-gradient(
-    var(--color-primary) 1.5px,
-    transparent 1.5px
-  );
-  background-size: 12px 12px;
-  opacity: 0.5;
-  z-index: 0;
+  object-fit: cover;
+  object-position: center;
+  display: block;
 }
 
 .hero-badge-floating {
@@ -1921,8 +1899,8 @@ textarea.form-control-custom {
 }
 
 .article-badge.badge-manasik {
-  color: #7C3AED;
-  background-color: #F5F3FF;
+  color: #7c3aed;
+  background-color: #f5f3ff;
 }
 
 .article-detail-thumb {
